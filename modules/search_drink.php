@@ -6,13 +6,6 @@
  */
 
 /**
- * Returns weight of module.
- */
-function search_drink_weight() {
-  return 1;
-}
-
-/**
  * Returns endpoint details.
  */
 function search_drink_endpoint() {

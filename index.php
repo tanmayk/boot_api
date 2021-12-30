@@ -4,6 +4,7 @@
  */
 
 require_once 'config.php';
+require_once 'apis.php';
 ?>
 
 <!doctype html>
@@ -26,20 +27,15 @@ require_once 'config.php';
       </nav>
     </header>
 
-    <?php $module_files = array_diff(scandir('modules'), ['.', '..']); ?>
-    <?php $modules = []; ?>
-    <?php foreach ($module_files as $file): ?>
-      <?php require_once 'modules/' . $file; ?>
-      <?php $module = str_replace('.php', '', $file); ?>
-      <?php $weight_fn = $module . '_weight'; ?>
-      <?php $weight = $weight_fn(); ?>
-      <?php $modules[$weight] = $module; ?>
-    <?php endforeach; ?>
-    <?php ksort($modules, SORT_NUMERIC); ?>
     <div class="container my-5">
       <p class="font-monospace">Base URL: <?php echo $conf['base_url']; ?></p>
       <div class="accordion" id="apiDoc">
-        <?php foreach ($modules as $module): ?>
+        <?php foreach ($apis as $module): ?>
+          <?php $file = 'modules/' . $module . '.php'; ?>
+          <?php if (!file_exists($file)): ?>
+            <?php continue; ?>
+          <?php endif; ?>
+          <?php require_once 'modules/' . $module . '.php'; ?>
           <?php $endpoint_fn = $module . '_endpoint'; ?>
           <?php $endpoint = $endpoint_fn(); ?>
           <div class="accordion-item">
@@ -146,7 +142,7 @@ require_once 'config.php';
     <footer class="text-center py-2 mt-2 bg-light">
       <div class="footer-copyright text-center text-black-50 small">
           Made by
-          <a class="black-text" href="https://osseed.com/">
+          <a class="black-text" target="_blank" href="https://osseed.com/">
              osseed.com
           </a>
         </div>

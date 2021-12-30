@@ -6,13 +6,6 @@
  */
 
 /**
- * Returns weight of module.
- */
-function random_drink_weight() {
-  return 2;
-}
-
-/**
  * Returns endpoint details.
  */
 function random_drink_endpoint() {
