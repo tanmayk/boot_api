@@ -7,14 +7,14 @@ Boot API is provides an easy & free way to document your APIs. The idea was to c
 <a href="https://github.com/tanmayk/boot_api/issues/new?assignees=&labels=bug&template=bug_report.md&title=bug%3A+">Report a Bug</a>
 ·
 <a href="https://github.com/tanmayk/boot_api/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=feat%3A+">Request a Feature</a>
-.
+·
 <a href="https://github.com/tanmayk/boot_api/discussions">Ask a Question</a>
 
 
 [![license](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE.md)
-[![made with hearth by OSSeed](https://img.shields.io/badge/made%20with%20%E2%9D%A4%20by-OSSeed-7db238?style=flat-square)](https://osseed.com/)
+[![made with love by OSSeed](https://img.shields.io/badge/made%20with%20%E2%9D%A4%20by-OSSeed-7db238?style=flat-square)](https://osseed.com/)
 
-Feel free to try this out. I am open to suggestions.
+Feel free to try this out. I am open to suggestions. [See how it looks.](https://tanmayk.github.io/boot_api/)
 
 ## How To
 
