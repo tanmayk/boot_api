@@ -41,7 +41,9 @@ require_once 'apis.php';
           <div class="accordion-item">
             <h2 class="accordion-header" id="<?php echo $module; ?>-header">
               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo $module; ?>-collapse" aria-expanded="true" aria-controls="<?php echo $module; ?>-collapse">
-                <p class="lead m-0"><span class="fw-bolder"><?php print $endpoint['type']; ?></span>&nbsp;<span class="text-dark fs-6"><?php print $endpoint['endpoint'] . ' - ' . $endpoint['name']; ?></span></p>
+                <?php $endpoint_type = mb_strtoupper($endpoint['type']); ?>
+                <?php $badge_class = !empty($conf['color_codes'][$endpoint_type]) ? $conf['color_codes'][$endpoint_type] : 'bg-secondary'; ?>
+                <p class="lead m-0"><span class="fw-bolder me-2 badge <?php print $badge_class; ?>" style="min-width:65px;"><?php print $endpoint_type; ?></span>&nbsp;<span class="text-dark fs-6"><?php print $endpoint['endpoint'] . ' - ' . $endpoint['name']; ?></span></p>
               </button>
             </h2>
             <div id="<?php echo $module; ?>-collapse" class="accordion-collapse collapse" aria-labelledby="<?php echo $module; ?>-header" data-bs-parent="#apiDoc">
