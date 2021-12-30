@@ -10,9 +10,13 @@
  */
 function search_drink_endpoint() {
   return [
+    // Name of your API endpoint.
     'name' => 'Search Cocktail',
+    // Type of API. It can be GET, POST, PUT, PATCH etc.
     'type' => 'GET',
+    // API endpoint.
     'endpoint' => '/search',
+    // Detailed description of your API.
     'description' => 'Search cocktail by name.',
   ];
 }
@@ -22,8 +26,12 @@ function search_drink_endpoint() {
  */
 function search_drink_request() {
   return [
+    // Name of the request parameter.
     's' => [
+      // Specify if the parameter is required or not. You can skip this if
+      // parameter is not required.
       'required' => TRUE,
+      // Description of your parameter.
       'description' => 'String. Name of the cocktail you wish to search for.',
     ],
   ];
@@ -34,8 +42,11 @@ function search_drink_request() {
  */
 function search_drink_response() {
   return [
+    // HTTP code. 200 means OK.
     200 => [
+      // All the responses that can be returned under 200 response.
       [
+        // This array contains single response under 200 http code.
         'drinks' => [
           [
             'drinkId' => 11007,
@@ -97,12 +108,17 @@ function search_drink_response() {
           ],
         ],
       ],
+      // You can add one more array of response under 200 http code.
     ],
+    // HTTP code. 400 means Bad Request.
     400 => [
+      // All the responses that can be returned under 400 response.
       [
         'status' => 'bool',
         'error' => 'string',
       ],
+      // You can add one more array of response under 400 http code.
     ],
+    // You can also include other HTTP codes & specify responses for each.
   ];
 }
