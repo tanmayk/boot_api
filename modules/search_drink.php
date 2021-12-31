@@ -18,6 +18,8 @@ function search_drink_endpoint() {
     'endpoint' => '/search',
     // Detailed description of your API.
     'description' => 'Search cocktail by name.',
+    // The group to which this API belongs to.
+    'group' => 'drinks',
   ];
 }
 

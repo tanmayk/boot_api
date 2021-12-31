@@ -14,6 +14,7 @@ function add_drink_endpoint() {
     'type' => 'POST',
     'endpoint' => '/add',
     'description' => 'Add new cocktail.',
+    'group' => 'drinks',
   ];
 }
 

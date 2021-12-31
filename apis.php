@@ -18,4 +18,6 @@ $apis = [
   'random_drink',
   // The file add_drink.php should be created in modules directory.
   'add_drink',
+  // The file user_login.php should be created in modules directory.
+  'user_login',
 ];

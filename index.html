@@ -20,338 +20,309 @@
 
     <div class="container my-5">
       <p class="font-monospace">Base URL: https://api.thecocktailstore.osseed.com/v1</p>
-      <div class="accordion" id="apiDoc">
-                                                                    <div class="accordion-item">
-            <h2 class="accordion-header" id="search_drink-header">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#search_drink-collapse" aria-expanded="true" aria-controls="search_drink-collapse">
-                                                <p class="lead m-0"><span class="fw-bolder me-2 badge bg-primary" style="min-width:65px;">GET</span>&nbsp;<span class="text-dark fs-6">/search - Search Cocktail</span></p>
-              </button>
-            </h2>
-            <div id="search_drink-collapse" class="accordion-collapse collapse" aria-labelledby="search_drink-header" data-bs-parent="#apiDoc">
-              <div class="accordion-body">
-                <div class="description mb-2">Search cocktail by name.</div>
-                                                                <div class="table-responsive">
-                  <table class="table table-light table-hover caption-top small">
-                    <caption>Request Parameters</caption>
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Required</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                                                                        <tr>
-                            <td class="font-monospace">s</td>
-                            <td>
-                                                              <strong>Yes</strong>
-                                                          </td>
-                            <td>String. Name of the cocktail you wish to search for.</td>
-                          </tr>
-                                                                                            </tbody>
-                  </table>
-                </div>
-
-                                                <div class="table-responsive">
-                  <table class="table table-light table-hover caption-top small">
-                    <caption>Responses</caption>
-                    <thead>
-                      <tr>
-                        <th>Code</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                                              <tr>
-                          <td>200</td>
-                          <td>
-                                                                                        <div class="bg-dark text-white p-2 mb-2">
-                                <pre class="m-0">{
-    "drinks": [
-        {
-            "drinkId": 11007,
-            "drink": "Margarita",
-            "tags": [
-                "IBA",
-                "Contemporary",
-                "Classic"
-            ],
-            "drinkCategory": "Cocktail",
-            "isAlcoholic": true,
-            "glassType": "Cocktail Glass",
-            "drinkInstructions": "Rub the rim of the glass with the lime slice to make the salt stick to it. Take care to moisten only the outer rim and sprinkle the salt on it. The salt should present to the lips of the imbiber and never mix into the cocktail. Shake the other ingredients with ice, then carefully pour into the glass.",
-            "drinkThumb": "https:\/\/cdn.pixabay.com\/photo\/2016\/07\/05\/22\/38\/margarita-1499498_960_720.jpg",
-            "drinkIngredients": [
-                {
-                    "name": "Tequila",
-                    "measure": "1 1\/2 oz"
-                },
-                {
-                    "name": "Triple sec",
-                    "measure": "1\/2 oz"
-                },
-                {
-                    "name": "Lime juice",
-                    "measure": "1 oz"
-                },
-                {
-                    "name": "Salt",
-                    "measure": null
-                }
-            ]
-        },
-        {
-            "drinkId": 11118,
-            "drink": "Blue Margarita",
-            "tags": null,
-            "drinkCategory": "Cocktail",
-            "isAlcoholic": true,
-            "glassType": "Cocktail Glass",
-            "drinkInstructions": "Rub rim of cocktail glass with lime juice. Dip rim in coarse salt. Shake tequila, blue curacao, and lime juice with ice, strain into the salt-rimmed glass, and serve",
-            "drinkThumb": "https:\/\/cdn.pixabay.com\/photo\/2016\/11\/19\/13\/53\/margarita-1839361_960_720.jpg",
-            "drinkIngredients": [
-                {
-                    "name": "Tequila",
-                    "measure": "1 1\/2 oz"
-                },
-                {
-                    "name": "Blue Curacao",
-                    "measure": "1 oz"
-                },
-                {
-                    "name": "Lime juice",
-                    "measure": "1 oz"
-                },
-                {
-                    "name": "Salt",
-                    "measure": "Coarse"
-                }
-            ]
-        }
-    ]
-}                              </div>
-                                                      </td>
+                                                                                                                                                                                                                                                                                  <p class="fw-bolder">Drinks<span class="small fw-light"> - Everything that is related with your drinks.</span></p>
+        <div class="accordion mb-4" id="apiDoc-drinks">
+                      <div class="accordion-item">
+              <h2 class="accordion-header" id="search_drink-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#search_drink-collapse" aria-expanded="true" aria-controls="search_drink-collapse">
+                                                      <p class="lead m-0"><span class="me-2 badge bg-primary" style="min-width:65px;">GET</span>&nbsp;<span class="text-dark fs-6">/search - Search Cocktail</span></p>
+                </button>
+              </h2>
+              <div id="search_drink-collapse" class="accordion-collapse collapse" aria-labelledby="search_drink-header" data-bs-parent="#apiDoc-drinks">
+                <div class="accordion-body">
+                  <div class="description mb-2">Search cocktail by name.</div>
+                                                                        <div class="table-responsive">
+                    <table class="table table-light table-hover caption-top small">
+                      <caption>Request Parameters</caption>
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Required</th>
+                          <th>Description</th>
                         </tr>
-                                              <tr>
-                          <td>400</td>
-                          <td>
-                                                                                        <div class="bg-dark text-white p-2 mb-2">
-                                <pre class="m-0">{
+                      </thead>
+                      <tbody>
+                                                                              <tr>
+                              <td class="font-monospace">username</td>
+                              <td>
+                                                                  <strong>Yes</strong>
+                                                              </td>
+                              <td>String. The user name for the login.</td>
+                            </tr>
+                                                                                  <tr>
+                              <td class="font-monospace">password</td>
+                              <td>
+                                                                  <strong>Yes</strong>
+                                                              </td>
+                              <td>String. The password for the login.</td>
+                            </tr>
+                                                                                                    </tbody>
+                    </table>
+                  </div>
+
+                                                      <div class="table-responsive">
+                    <table class="table table-light table-hover caption-top small">
+                      <caption>Responses</caption>
+                      <thead>
+                        <tr>
+                          <th>Code</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                                                  <tr>
+                            <td>200</td>
+                            <td>
+                                                                                              <div class="bg-dark text-white p-2 mb-2">
+                                  <pre class="m-0">{
+    "userId": 232,
+    "accessToken": "AABBCCDDEEFFGGHH"
+}                                </div>
+                                                          </td>
+                          </tr>
+                                                  <tr>
+                            <td>400</td>
+                            <td>
+                                                                                              <div class="bg-dark text-white p-2 mb-2">
+                                  <pre class="m-0">{
     "status": "bool",
     "error": "string"
-}                              </div>
-                                                      </td>
-                        </tr>
-                                          </tbody>
-                  </table>
+}                                </div>
+                                                          </td>
+                          </tr>
+                                              </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-                                                                    <div class="accordion-item">
-            <h2 class="accordion-header" id="random_drink-header">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#random_drink-collapse" aria-expanded="true" aria-controls="random_drink-collapse">
-                                                <p class="lead m-0"><span class="fw-bolder me-2 badge bg-primary" style="min-width:65px;">GET</span>&nbsp;<span class="text-dark fs-6">/random - Random Cocktail</span></p>
-              </button>
-            </h2>
-            <div id="random_drink-collapse" class="accordion-collapse collapse" aria-labelledby="random_drink-header" data-bs-parent="#apiDoc">
-              <div class="accordion-body">
-                <div class="description mb-2">Lookup a random cocktail.</div>
-                                                                <div class="table-responsive">
-                  <table class="table table-light table-hover caption-top small">
-                    <caption>Request Parameters</caption>
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Required</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                                              <tr><td colspan="3">No parameters are needed.</td></tr>
-                                          </tbody>
-                  </table>
-                </div>
-
-                                                <div class="table-responsive">
-                  <table class="table table-light table-hover caption-top small">
-                    <caption>Responses</caption>
-                    <thead>
-                      <tr>
-                        <th>Code</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                                              <tr>
-                          <td>200</td>
-                          <td>
-                                                                                        <div class="bg-dark text-white p-2 mb-2">
-                                <pre class="m-0">{
-    "drinks": [
-        {
-            "drinkId": 11007,
-            "drink": "Margarita",
-            "tags": [
-                "IBA",
-                "Contemporary",
-                "Classic"
-            ],
-            "drinkCategory": "Cocktail",
-            "isAlcoholic": "Alcoholic",
-            "glassType": "Cocktail Glass",
-            "drinkInstructions": "Rub the rim of the glass with the lime slice to make the salt stick to it. Take care to moisten only the outer rim and sprinkle the salt on it. The salt should present to the lips of the imbiber and never mix into the cocktail. Shake the other ingredients with ice, then carefully pour into the glass.",
-            "drinkThumb": "https:\/\/cdn.pixabay.com\/photo\/2016\/07\/05\/22\/38\/margarita-1499498_960_720.jpg",
-            "drinkIngredients": [
-                {
-                    "name": "Tequila",
-                    "measure": "1 1\/2 oz"
-                },
-                {
-                    "name": "Triple sec",
-                    "measure": "1\/2 oz"
-                },
-                {
-                    "name": "Lime juice",
-                    "measure": "1 oz"
-                },
-                {
-                    "name": "Salt",
-                    "measure": null
-                }
-            ]
-        }
-    ]
-}                              </div>
-                                                      </td>
+                      <div class="accordion-item">
+              <h2 class="accordion-header" id="random_drink-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#random_drink-collapse" aria-expanded="true" aria-controls="random_drink-collapse">
+                                                      <p class="lead m-0"><span class="me-2 badge bg-primary" style="min-width:65px;">GET</span>&nbsp;<span class="text-dark fs-6">/random - Random Cocktail</span></p>
+                </button>
+              </h2>
+              <div id="random_drink-collapse" class="accordion-collapse collapse" aria-labelledby="random_drink-header" data-bs-parent="#apiDoc-drinks">
+                <div class="accordion-body">
+                  <div class="description mb-2">Lookup a random cocktail.</div>
+                                                                        <div class="table-responsive">
+                    <table class="table table-light table-hover caption-top small">
+                      <caption>Request Parameters</caption>
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Required</th>
+                          <th>Description</th>
                         </tr>
-                                              <tr>
-                          <td>400</td>
-                          <td>
-                                                                                        <div class="bg-dark text-white p-2 mb-2">
-                                <pre class="m-0">{
+                      </thead>
+                      <tbody>
+                                                                              <tr>
+                              <td class="font-monospace">username</td>
+                              <td>
+                                                                  <strong>Yes</strong>
+                                                              </td>
+                              <td>String. The user name for the login.</td>
+                            </tr>
+                                                                                  <tr>
+                              <td class="font-monospace">password</td>
+                              <td>
+                                                                  <strong>Yes</strong>
+                                                              </td>
+                              <td>String. The password for the login.</td>
+                            </tr>
+                                                                                                    </tbody>
+                    </table>
+                  </div>
+
+                                                      <div class="table-responsive">
+                    <table class="table table-light table-hover caption-top small">
+                      <caption>Responses</caption>
+                      <thead>
+                        <tr>
+                          <th>Code</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                                                  <tr>
+                            <td>200</td>
+                            <td>
+                                                                                              <div class="bg-dark text-white p-2 mb-2">
+                                  <pre class="m-0">{
+    "userId": 232,
+    "accessToken": "AABBCCDDEEFFGGHH"
+}                                </div>
+                                                          </td>
+                          </tr>
+                                                  <tr>
+                            <td>400</td>
+                            <td>
+                                                                                              <div class="bg-dark text-white p-2 mb-2">
+                                  <pre class="m-0">{
     "status": "bool",
     "error": "string"
-}                              </div>
-                                                      </td>
-                        </tr>
-                                          </tbody>
-                  </table>
+}                                </div>
+                                                          </td>
+                          </tr>
+                                              </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-                                                                    <div class="accordion-item">
-            <h2 class="accordion-header" id="add_drink-header">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#add_drink-collapse" aria-expanded="true" aria-controls="add_drink-collapse">
-                                                <p class="lead m-0"><span class="fw-bolder me-2 badge bg-success" style="min-width:65px;">POST</span>&nbsp;<span class="text-dark fs-6">/add - Add Cocktail</span></p>
-              </button>
-            </h2>
-            <div id="add_drink-collapse" class="accordion-collapse collapse" aria-labelledby="add_drink-header" data-bs-parent="#apiDoc">
-              <div class="accordion-body">
-                <div class="description mb-2">Add new cocktail.</div>
-                                                                <div class="table-responsive">
-                  <table class="table table-light table-hover caption-top small">
-                    <caption>Request Parameters</caption>
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Required</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                                                                        <tr>
-                            <td class="font-monospace">drink</td>
-                            <td>
-                                                              <strong>Yes</strong>
-                                                          </td>
-                            <td>String. Name of the drink to be added.</td>
-                          </tr>
-                                                                            <tr>
-                            <td class="font-monospace">tags</td>
-                            <td>
-                                                          </td>
-                            <td>Array. An array of tags.</td>
-                          </tr>
-                                                                            <tr>
-                            <td class="font-monospace">drinkCategory</td>
-                            <td>
-                                                              <strong>Yes</strong>
-                                                          </td>
-                            <td>String. Name of the category to which the drink belongs.</td>
-                          </tr>
-                                                                            <tr>
-                            <td class="font-monospace">isAlcoholic</td>
-                            <td>
-                                                          </td>
-                            <td>Boolean. Indicates if the drink is alcoholic. Defaults to false.</td>
-                          </tr>
-                                                                            <tr>
-                            <td class="font-monospace">glassType</td>
-                            <td>
-                                                          </td>
-                            <td>String. Type of the glass to use to serve the drink.</td>
-                          </tr>
-                                                                            <tr>
-                            <td class="font-monospace">drinkInstructions</td>
-                            <td>
-                                                          </td>
-                            <td>String. Instructions to prepare & serve the drink.</td>
-                          </tr>
-                                                                            <tr>
-                            <td class="font-monospace">drinkThumb</td>
-                            <td>
-                                                          </td>
-                            <td>String. A URL of thumbnail image of the drink.</td>
-                          </tr>
-                                                                            <tr>
-                            <td class="font-monospace">drinkIngredients</td>
-                            <td>
-                                                          </td>
-                            <td>Array. An array of ingredients used to prepare the drink.<ul><li><strong>name</strong> - Required. Name of the ingredient.</li><li><strong>measure</strong> - Required. Measure of the ingredient.</li></ul></td>
-                          </tr>
-                                                                                            </tbody>
-                  </table>
-                </div>
-
-                                                <div class="table-responsive">
-                  <table class="table table-light table-hover caption-top small">
-                    <caption>Responses</caption>
-                    <thead>
-                      <tr>
-                        <th>Code</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                                              <tr>
-                          <td>200</td>
-                          <td>
-                                                                                        <div class="bg-dark text-white p-2 mb-2">
-                                <pre class="m-0">{
-    "drinkId": 11118
-}                              </div>
-                                                      </td>
+                      <div class="accordion-item">
+              <h2 class="accordion-header" id="add_drink-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#add_drink-collapse" aria-expanded="true" aria-controls="add_drink-collapse">
+                                                      <p class="lead m-0"><span class="me-2 badge bg-success" style="min-width:65px;">POST</span>&nbsp;<span class="text-dark fs-6">/add - Add Cocktail</span></p>
+                </button>
+              </h2>
+              <div id="add_drink-collapse" class="accordion-collapse collapse" aria-labelledby="add_drink-header" data-bs-parent="#apiDoc-drinks">
+                <div class="accordion-body">
+                  <div class="description mb-2">Add new cocktail.</div>
+                                                                        <div class="table-responsive">
+                    <table class="table table-light table-hover caption-top small">
+                      <caption>Request Parameters</caption>
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Required</th>
+                          <th>Description</th>
                         </tr>
-                                              <tr>
-                          <td>400</td>
-                          <td>
-                                                                                        <div class="bg-dark text-white p-2 mb-2">
-                                <pre class="m-0">{
+                      </thead>
+                      <tbody>
+                                                                              <tr>
+                              <td class="font-monospace">username</td>
+                              <td>
+                                                                  <strong>Yes</strong>
+                                                              </td>
+                              <td>String. The user name for the login.</td>
+                            </tr>
+                                                                                  <tr>
+                              <td class="font-monospace">password</td>
+                              <td>
+                                                                  <strong>Yes</strong>
+                                                              </td>
+                              <td>String. The password for the login.</td>
+                            </tr>
+                                                                                                    </tbody>
+                    </table>
+                  </div>
+
+                                                      <div class="table-responsive">
+                    <table class="table table-light table-hover caption-top small">
+                      <caption>Responses</caption>
+                      <thead>
+                        <tr>
+                          <th>Code</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                                                  <tr>
+                            <td>200</td>
+                            <td>
+                                                                                              <div class="bg-dark text-white p-2 mb-2">
+                                  <pre class="m-0">{
+    "userId": 232,
+    "accessToken": "AABBCCDDEEFFGGHH"
+}                                </div>
+                                                          </td>
+                          </tr>
+                                                  <tr>
+                            <td>400</td>
+                            <td>
+                                                                                              <div class="bg-dark text-white p-2 mb-2">
+                                  <pre class="m-0">{
     "status": "bool",
     "error": "string"
-}                              </div>
-                                                      </td>
-                        </tr>
-                                          </tbody>
-                  </table>
+}                                </div>
+                                                          </td>
+                          </tr>
+                                              </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+                  </div>
+              <p class="fw-bolder">Users<span class="small fw-light"> - All the operations related with users.</span></p>
+        <div class="accordion mb-4" id="apiDoc-users">
+                      <div class="accordion-item">
+              <h2 class="accordion-header" id="user_login-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#user_login-collapse" aria-expanded="true" aria-controls="user_login-collapse">
+                                                      <p class="lead m-0"><span class="me-2 badge bg-success" style="min-width:65px;">POST</span>&nbsp;<span class="text-dark fs-6">/user/login - User Login</span></p>
+                </button>
+              </h2>
+              <div id="user_login-collapse" class="accordion-collapse collapse" aria-labelledby="user_login-header" data-bs-parent="#apiDoc-users">
+                <div class="accordion-body">
+                  <div class="description mb-2">Logs user into the system.</div>
+                                                                        <div class="table-responsive">
+                    <table class="table table-light table-hover caption-top small">
+                      <caption>Request Parameters</caption>
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Required</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                                                                              <tr>
+                              <td class="font-monospace">username</td>
+                              <td>
+                                                                  <strong>Yes</strong>
+                                                              </td>
+                              <td>String. The user name for the login.</td>
+                            </tr>
+                                                                                  <tr>
+                              <td class="font-monospace">password</td>
+                              <td>
+                                                                  <strong>Yes</strong>
+                                                              </td>
+                              <td>String. The password for the login.</td>
+                            </tr>
+                                                                                                    </tbody>
+                    </table>
+                  </div>
+
+                                                      <div class="table-responsive">
+                    <table class="table table-light table-hover caption-top small">
+                      <caption>Responses</caption>
+                      <thead>
+                        <tr>
+                          <th>Code</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                                                  <tr>
+                            <td>200</td>
+                            <td>
+                                                                                              <div class="bg-dark text-white p-2 mb-2">
+                                  <pre class="m-0">{
+    "userId": 232,
+    "accessToken": "AABBCCDDEEFFGGHH"
+}                                </div>
+                                                          </td>
+                          </tr>
+                                                  <tr>
+                            <td>400</td>
+                            <td>
+                                                                                              <div class="bg-dark text-white p-2 mb-2">
+                                  <pre class="m-0">{
+    "status": "bool",
+    "error": "string"
+}                                </div>
+                                                          </td>
+                          </tr>
+                                              </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
-    </div>
+            </div>
+                  </div>
+          </div>
     <footer class="text-center py-2 mt-2 bg-light">
       <div class="footer-copyright text-center text-black-50 small">
           Made by

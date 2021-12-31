@@ -5,6 +5,7 @@
 
 require_once 'config.php';
 require_once 'apis.php';
+require_once 'groups.php';
 ?>
 
 <!doctype html>
@@ -29,117 +30,125 @@ require_once 'apis.php';
 
     <div class="container my-5">
       <p class="font-monospace">Base URL: <?php echo $conf['base_url']; ?></p>
-      <div class="accordion" id="apiDoc">
-        <?php foreach ($apis as $module): ?>
-          <?php $file = 'modules/' . $module . '.php'; ?>
-          <?php if (!file_exists($file)): ?>
-            <?php continue; ?>
-          <?php endif; ?>
-          <?php require_once 'modules/' . $module . '.php'; ?>
-          <?php $endpoint_fn = $module . '_endpoint'; ?>
-          <?php $endpoint = $endpoint_fn(); ?>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="<?php echo $module; ?>-header">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo $module; ?>-collapse" aria-expanded="true" aria-controls="<?php echo $module; ?>-collapse">
-                <?php $endpoint_type = mb_strtoupper($endpoint['type']); ?>
-                <?php $badge_class = !empty($conf['color_codes'][$endpoint_type]) ? $conf['color_codes'][$endpoint_type] : 'bg-secondary'; ?>
-                <p class="lead m-0"><span class="fw-bolder me-2 badge <?php print $badge_class; ?>" style="min-width:65px;"><?php print $endpoint_type; ?></span>&nbsp;<span class="text-dark fs-6"><?php print $endpoint['endpoint'] . ' - ' . $endpoint['name']; ?></span></p>
-              </button>
-            </h2>
-            <div id="<?php echo $module; ?>-collapse" class="accordion-collapse collapse" aria-labelledby="<?php echo $module; ?>-header" data-bs-parent="#apiDoc">
-              <div class="accordion-body">
-                <div class="description mb-2"><?php print $endpoint['description']; ?></div>
-                <?php $request_fn = $module . '_request'; ?>
-                <?php $parameters = $request_fn(); ?>
-                <?php $example_request = []; ?>
-                <div class="table-responsive">
-                  <table class="table table-light table-hover caption-top small">
-                    <caption>Request Parameters</caption>
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Required</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php if (!empty($parameters)): ?>
-                        <?php foreach ($parameters as $param => $param_data): ?>
-                          <tr>
-                            <td class="font-monospace"><?php print $param; ?></td>
-                            <td>
-                              <?php if (!empty($param_data['required'])): ?>
-                                <strong>Yes</strong>
-                              <?php endif; ?>
-                            </td>
-                            <td><?php print $param_data['description']; ?></td>
-                          </tr>
-                          <?php if (isset($param_data['value'])): ?>
-                            <?php $example_request[$param] = $param_data['value']; ?>
-                          <?php endif; ?>
-                        <?php endforeach; ?>
-                      <?php else: ?>
-                        <tr><td colspan="3">No parameters are needed.</td></tr>
-                      <?php endif; ?>
-                    </tbody>
-                  </table>
-                </div>
-                <?php if (!empty($example_request)): ?>
+      <?php $group_apis = []; ?>
+      <?php foreach ($apis as $module): ?>
+        <?php $file = 'modules/' . $module . '.php'; ?>
+        <?php if (!file_exists($file)): ?>
+          <?php continue; ?>
+        <?php endif; ?>
+        <?php require_once 'modules/' . $module . '.php'; ?>
+        <?php $endpoint_fn = $module . '_endpoint'; ?>
+        <?php $endpoint = $endpoint_fn(); ?>
+        <?php $group_name = !empty($endpoint['group']) ? $endpoint['group'] : NULL; ?>
+        <?php $group_apis[$group_name][$module] = $endpoint; ?>
+      <?php endforeach; ?>
+      <?php foreach ($group_apis as $group_name => $modules): ?>
+        <p class="fw-bolder"><?php print $groups[$group_name]['name']; ?><span class="small fw-light"> - <?php print $groups[$group_name]['description']; ?></span></p>
+        <div class="accordion mb-4" id="apiDoc-<?php print $group_name; ?>">
+          <?php foreach ($modules as $endpoint_name => $endpoint): ?>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="<?php echo $endpoint_name; ?>-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo $endpoint_name; ?>-collapse" aria-expanded="true" aria-controls="<?php echo $endpoint_name; ?>-collapse">
+                  <?php $endpoint_type = mb_strtoupper($endpoint['type']); ?>
+                  <?php $badge_class = !empty($conf['color_codes'][$endpoint_type]) ? $conf['color_codes'][$endpoint_type] : 'bg-secondary'; ?>
+                  <p class="lead m-0"><span class="me-2 badge <?php print $badge_class; ?>" style="min-width:65px;"><?php print $endpoint_type; ?></span>&nbsp;<span class="text-dark fs-6"><?php print $endpoint['endpoint'] . ' - ' . $endpoint['name']; ?></span></p>
+                </button>
+              </h2>
+              <div id="<?php echo $endpoint_name; ?>-collapse" class="accordion-collapse collapse" aria-labelledby="<?php echo $endpoint_name; ?>-header" data-bs-parent="#apiDoc-<?php print $group_name; ?>">
+                <div class="accordion-body">
+                  <div class="description mb-2"><?php print $endpoint['description']; ?></div>
+                  <?php $request_fn = $module . '_request'; ?>
+                  <?php $parameters = $request_fn(); ?>
+                  <?php $example_request = []; ?>
                   <div class="table-responsive">
                     <table class="table table-light table-hover caption-top small">
-                      <caption>Example Request</caption>
+                      <caption>Request Parameters</caption>
                       <thead>
                         <tr>
-                          <th>Request</th>
+                          <th>Name</th>
+                          <th>Required</th>
+                          <th>Description</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>
-                            <?php $ex_json = json_encode($example_request, JSON_PRETTY_PRINT); ?>
-                            <div class="bg-dark text-white p-2 mb-2">
-                              <pre class="m-0"><?php print $ex_json; ?>
-                            </div>
-                          </td>
-                        </tr>
+                        <?php if (!empty($parameters)): ?>
+                          <?php foreach ($parameters as $param => $param_data): ?>
+                            <tr>
+                              <td class="font-monospace"><?php print $param; ?></td>
+                              <td>
+                                <?php if (!empty($param_data['required'])): ?>
+                                  <strong>Yes</strong>
+                                <?php endif; ?>
+                              </td>
+                              <td><?php print $param_data['description']; ?></td>
+                            </tr>
+                            <?php if (isset($param_data['value'])): ?>
+                              <?php $example_request[$param] = $param_data['value']; ?>
+                            <?php endif; ?>
+                          <?php endforeach; ?>
+                        <?php else: ?>
+                          <tr><td colspan="3">No parameters are needed.</td></tr>
+                        <?php endif; ?>
                       </tbody>
                     </table>
                   </div>
-                <?php endif; ?>
-
-                <?php $response_fn = $module . '_response'; ?>
-                <?php $response = $response_fn(); ?>
-                <div class="table-responsive">
-                  <table class="table table-light table-hover caption-top small">
-                    <caption>Responses</caption>
-                    <thead>
-                      <tr>
-                        <th>Code</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php foreach ($response as $code => $response_data): ?>
-                        <tr>
-                          <td><?php print $code; ?></td>
-                          <td>
-                            <?php foreach ($response_data as $resp): ?>
-                              <?php $json = json_encode($resp, JSON_PRETTY_PRINT); ?>
+                  <?php if (!empty($example_request)): ?>
+                    <div class="table-responsive">
+                      <table class="table table-light table-hover caption-top small">
+                        <caption>Example Request</caption>
+                        <thead>
+                          <tr>
+                            <th>Request</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <?php $ex_json = json_encode($example_request, JSON_PRETTY_PRINT); ?>
                               <div class="bg-dark text-white p-2 mb-2">
-                                <pre class="m-0"><?php print $json; ?>
+                                <pre class="m-0"><?php print $ex_json; ?>
                               </div>
-                            <?php endforeach; ?>
-                          </td>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  <?php endif; ?>
+
+                  <?php $response_fn = $module . '_response'; ?>
+                  <?php $response = $response_fn(); ?>
+                  <div class="table-responsive">
+                    <table class="table table-light table-hover caption-top small">
+                      <caption>Responses</caption>
+                      <thead>
+                        <tr>
+                          <th>Code</th>
+                          <th>Description</th>
                         </tr>
-                      <?php endforeach; ?>
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        <?php foreach ($response as $code => $response_data): ?>
+                          <tr>
+                            <td><?php print $code; ?></td>
+                            <td>
+                              <?php foreach ($response_data as $resp): ?>
+                                <?php $json = json_encode($resp, JSON_PRETTY_PRINT); ?>
+                                <div class="bg-dark text-white p-2 mb-2">
+                                  <pre class="m-0"><?php print $json; ?>
+                                </div>
+                              <?php endforeach; ?>
+                            </td>
+                          </tr>
+                        <?php endforeach; ?>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        <?php endforeach; ?>
-      </div>
+          <?php endforeach; ?>
+        </div>
+      <?php endforeach; ?>
     </div>
     <footer class="text-center py-2 mt-2 bg-light">
       <div class="footer-copyright text-center text-black-50 small">

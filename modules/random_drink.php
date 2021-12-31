@@ -14,6 +14,7 @@ function random_drink_endpoint() {
     'type' => 'GET',
     'endpoint' => '/random',
     'description' => 'Lookup a random cocktail.',
+    'group' => 'drinks',
   ];
 }
 
